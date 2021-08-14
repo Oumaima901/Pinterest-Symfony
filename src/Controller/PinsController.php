@@ -45,12 +45,11 @@ class PinsController extends AbstractController
         return $this->render('pins/create.html.twig', ['monformulaire' => $form->createView()]);
     }
     /**
-     * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit" , methods={"GET","PUT"})
+     * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit" , methods={"GET","POST"})
      */
     public function edit(Pin $pin, Request $request, EntityManagerInterface $em): Response
     {
-        $form = $this->createForm(PinType::class, $pin, [
-            'method' => 'PUT']); 
+        $form = $this->createForm(PinType::class, $pin); 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -62,10 +61,15 @@ class PinsController extends AbstractController
     /**
      * @Route("/pins/{id<[0-9]+>}/delete", name="app_pins_delete" , methods={"DELETE","GET","POST"})
      */
-    public function delete(Pin $pin, EntityManagerInterface $em): Response
+    public function delete(Pin $pin,Request $request, EntityManagerInterface $em): Response
     {
-        $em->remove($pin);
-        $em->flush();
+
+        if ($this->isCsrfTokenValid('pin_deletion_', $pin->getId(), $request->request->get('csrf_token'))){
+            $em->remove($pin);
+            $em->flush();
+
+        }
+   
         return $this->redirectToRoute('app_home');
     }
   
