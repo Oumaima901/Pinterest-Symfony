@@ -17,3 +17,7 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> Custom env vars###
+/public/uploads/
+###< end Custom env vars ###
