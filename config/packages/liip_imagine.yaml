@@ -2,30 +2,10 @@
 liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "gd"
-
-
     filter_sets:
-
-        # name our filter set "my_crop_filter"
-        squared_thumbnail_medium:
+        # name our filter set "my_fixed_filter"
+        my_fixed_filter:
             filters:
+                # use and setup the "fixed" filter
+                thumbnail: {size:[50,50], mode: outbound, allow_upscale: true }
 
-                # use and setup the "crop" filter
-                thumbnail:
-
-                    # set the size of the cropping area
-                    size: [ 300, 300 ]
-
-                    # set the starting coordinates of the crop
-                    mode: outbound
-                    allow_upscale: true
-        squared_thumbnail_small:
-            filters:
-                thumbnail:
-
-                    # set the size of the cropping area
-                    size: [ 200, 200 ]
-
-                    # set the starting coordinates of the crop
-                    mode: outbound
-                    allow_upscale: true

@@ -20,7 +20,7 @@ class PinType extends AbstractType
                 'required' => false,
                 'allow_delete' => true,
                 'download_uri' => true,
-                'imagine_pattern' => 'squared_thumbnail_small'
+              
                 
                 
             ])
